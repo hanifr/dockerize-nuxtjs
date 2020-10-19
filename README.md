@@ -4,7 +4,7 @@ cd dockerize-nuxtjs
 git clone https://github.com/username/nuxtjs-app
 sudo nano docker-compose.yml
 ```
-Change the build: ./nuxtjs-app
+1. Change the build: ./nuxtjs-app
 ```
 version: "3"
 
@@ -27,6 +27,24 @@ services:
       - ./nginx:/etc/nginx/conf.d
     depends_on:
       - nuxt
+```
+2. Add dockerfile in the nuxtjs-app
+```
+cd nuxtjs-app
+sudo nano dockerfile
+
+FROM node:10.20
+
+ENV APP_ROOT /src
+
+RUN mkdir ${APP_ROOT}
+WORKDIR ${APP_ROOT}
+ADD . ${APP_ROOT}
+
+RUN npm ci
+RUN npm run build
+
+ENV HOST 0.0.0.0
 ```
 ## Getting you instance ready for Docker
 Run the following commands to install Docker and Docker Compose
