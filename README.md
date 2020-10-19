@@ -56,7 +56,7 @@ Download or clone this repository. Go into the root folder of this repository, a
 docker-compose build && docker-compose up -d
 ```
 ## Deployment on server
-1. Check the containerID the running nuxtjs-app
+1. Check the containerID of the running nuxtjs-app
 ```
 docker ps
 ```
@@ -66,7 +66,7 @@ docker commit -m "nuxt-js" -a "username" containerID username/nuxtjs-app
 ```
 3. Push the app to dockerhub
 ```
->>docker push username/nuxtjs-app
+docker push username/nuxtjs-app
 ```
 4. Go to directory deploy-on-server/nuxtapp
 ```
