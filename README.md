@@ -1,5 +1,33 @@
 # Nuxt.js NGINX Docker
+```
+cd dockerize-nuxtjs
+git clone https://github.com/username/nuxtjs-app
+sudo nano docker-compose.yml
+```
+Change the build: ./nuxtjs-app
+```
+version: "3"
 
+services:
+  nuxt:
+    build: ./nuxtjs-app
+    container_name: nuxt
+    restart: always
+    ports:
+      - "5000:3000"
+    command:
+      "npm run start"
+
+  nginx:
+    image: nginx:1.17
+    container_name: ngx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    depends_on:
+      - nuxt
+```
 ## Getting you instance ready for Docker
 Run the following commands to install Docker and Docker Compose
 On Ubuntu
