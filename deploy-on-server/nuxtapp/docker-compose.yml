@@ -2,30 +2,16 @@ version: "3"
 
 services:
   nuxt:
-    image: aneh2killa/nuxtapp
+    image: username/nuxtjs-app
     restart: always
     container_name: nuxt
     ports:
       - "5000:3000"
-    # command:
-    #   "npm run start"
     environment:
-#      - FLOWS=/data/flows.json
-      VIRTUAL_HOST: seaic.airmode.live
+      VIRTUAL_HOST: domain.name
 #      VIRTUAL_PORT: 1880
-      LETSENCRYPT_HOST: seaic.airmmode.live
-      LETSENCRYPT_EMAIL: irhaniframli@gmail.com
-
-  # nginx:
-  #   image: nginx:1.17
-  #   container_name: ngx
-  #   ports:
-  #     - "80:80"
-  #     - 443:443
-  #   volumes:
-  #     - ./nginx:/etc/nginx/conf.d
-  #   depends_on:
-  #     - nuxt
+      LETSENCRYPT_HOST: domain.name
+      LETSENCRYPT_EMAIL: email
 networks:
  default:
   external:

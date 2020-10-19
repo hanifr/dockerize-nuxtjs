@@ -55,3 +55,53 @@ Download or clone this repository. Go into the root folder of this repository, a
 ```
 docker-compose build && docker-compose up -d
 ```
+## Deployment on server
+1. Check the containerID the running nuxtjs-app
+```
+docker ps
+```
+2. commit a change to a container
+```
+docker commit -m "nuxt-js" -a "username" containerID username/nuxtjs-app
+```
+3. Push the app to dockerhub
+```
+>>docker push username/nuxtjs-app
+```
+4. Go to directory deploy-on-server/nuxtapp
+```
+cd
+cd dockerize-nuxtjs/deploy-on-server/nuxtapp
+```
+5. Go to directory deploy-on-server/nginxproxy
+```
+cd
+cd dockerize-nuxtjs/deploy-on-server/nginxproxy
+docker-compose up -d
+```
+6. Make changes on docker-compose.yml
+```
+version: "3"
+
+services:
+  nuxt:
+    image: username/nuxtjs-app
+    restart: always
+    container_name: nuxt
+    ports:
+      - "5000:3000"
+    # command:
+    #   "npm run start"
+    environment:
+      VIRTUAL_HOST: domain.name
+      LETSENCRYPT_HOST: domain.name
+      LETSENCRYPT_EMAIL: email
+networks:
+ default:
+  external:
+    name: nginxproxy_default
+```
+7. Deploy Nuxtjs-app
+```
+docker-compose up -d
+```
